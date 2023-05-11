@@ -3,9 +3,7 @@
 #include <stdbool.h>
 
 int main(){
-    int size = 1000;
     char nname[100], oname[100];
-    char c = fgetc(fp1);
     int flag = false;
     printf("enter the new file name: ");
     scanf("%s", nname);
@@ -15,6 +13,7 @@ int main(){
     strcat(oname,".txt");
     FILE *fp = fopen(nname, "w");
     FILE *fp1 = fopen(oname, "r");
+    char c = fgetc(fp1);
     while(c != EOF){
         fputc(c, fp);
         c = fgetc(fp1);
@@ -22,12 +21,14 @@ int main(){
     fclose(fp);
     printf("Do you want to append data in your new file? 1-Yes/0-No");
     scanf("%d", &flag);
+    char a[1000];
+    getchar();
     if(flag == 1){
-        *fp = fopen(nname, "a+");
-        char app[size];
+        FILE *fp = fopen(nname, "a+");
         printf("Enter you data: ");
-        scanf("%s" app);
-        fputs(app, fp);
+    	scanf("%[^\n]s", a);
+    	printf("%s",a);
+        fputs(a, fp);
     }
     return 0;
 }

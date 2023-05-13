@@ -1,1 +1,1 @@
-File data is being copied
+This data is being read from old.txt

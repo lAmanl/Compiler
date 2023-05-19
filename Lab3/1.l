@@ -1,17 +1,14 @@
-/*lex program to count number of words*/
 %{
 #include <stdio.h>
-int i = 0;
 %}
 %%
-[a-zA-Z]+ {i++;}
-"\n" {printf("Total number of words: %d",i);}
+[a-zA-Z][a-zA-Z0-9]* {printf("Identifier: %s\n",yytext);}
+[0-9]+ {printf("Number: %s\n",yytext);}
+\n return 0;
 .;
 %%
-int yywrap(){};
-int main()
-{
-    yylex();
-//printf("Welcome to Lexical Analysis");
+int main(){
+yylex();
 return 0;
 }
+int yywrap(){}

@@ -351,8 +351,8 @@ static void yynoreturn yy_fatal_error ( const char* msg  );
 	(yy_hold_char) = *yy_cp; \
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
-#define YY_NUM_RULES 5
-#define YY_END_OF_BUFFER 6
+#define YY_NUM_RULES 6
+#define YY_END_OF_BUFFER 7
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -362,7 +362,7 @@ struct yy_trans_info
 	};
 static const flex_int16_t yy_accept[13] =
     {   0,
-        1,    1,    6,    5,    5,    2,    1,    4,    2,    3,
+        1,    1,    7,    6,    5,    2,    1,    4,    2,    3,
         1,    0
     } ;
 
@@ -446,8 +446,9 @@ char *yytext;
 #line 1 "4.l"
 #line 2 "4.l"
 #include <stdio.h>
-#line 450 "lex.yy.c"
+int count = 0;
 #line 451 "lex.yy.c"
+#line 452 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -664,9 +665,9 @@ YY_DECL
 		}
 
 	{
-#line 5 "4.l"
+#line 6 "4.l"
 
-#line 670 "lex.yy.c"
+#line 671 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -725,30 +726,36 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 6 "4.l"
-{printf("Invalid\n");}
+#line 7 "4.l"
+{printf("Invalid: %s\n", yytext);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 7 "4.l"
-{printf("Invalid\n");}
+#line 8 "4.l"
+{printf("Invalid: %s\n", yytext);}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 8 "4.l"
-{printf("Valid\n");}
+#line 9 "4.l"
+{printf("Valid: %s\n", yytext); count++;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 9 "4.l"
+#line 10 "4.l"
 
 	YY_BREAK
 case 5:
+/* rule 5 can match eol */
 YY_RULE_SETUP
-#line 10 "4.l"
+#line 11 "4.l"
+{return 0;}
+	YY_BREAK
+case 6:
+YY_RULE_SETUP
+#line 12 "4.l"
 ECHO;
 	YY_BREAK
-#line 752 "lex.yy.c"
+#line 759 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1753,7 +1760,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 10 "4.l"
+#line 12 "4.l"
 
 
 int yywrap(){
@@ -1762,6 +1769,7 @@ return 1;}
 int main(){
 printf("Enter the words: \n");
 yylex();
+printf("Count: %d\n", count);
 return 0;
 }
 

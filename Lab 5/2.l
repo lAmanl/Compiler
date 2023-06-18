@@ -1,33 +1,32 @@
-%{
-%}
-%s A B C DEAD
+%s X Y Z D
 %%
-<INITIAL>0 BEGIN A;
-<INITIAL>1 BEGIN B;
-<INITIAL>\n BEGIN INITIAL;{printf("Not Accepted\n");}
-<INITIAL>[^01\n] BEGIN DEAD;
+<INITIAL>0 BEGIN X;
+<INITIAL>1 BEGIN Y;
+<INITIAL>\n BEGIN INITIAL;{printf("Invalid\n");}
+<INITIAL>[^01\n] BEGIN D;
 
-<A>0 BEGIN INITIAL;
-<A>1 BEGIN C;
-<A>\n BEGIN INITIAL;{printf("Not Accepted\n");}
-<A>[^01\n] BEGIN DEAD;
+<X>0 BEGIN INITIAL;
+<X>1 BEGIN Z;
+<X>\n BEGIN INITIAL;{printf("Invalid\n");}
+<X>[^01\n] BEGIN D;
 
-<B>0 BEGIN C;
-<B>1 BEGIN INITIAL;
-<B>\n BEGIN INITIAL;{printf("Accepted\n");}
-<B>[^01\n] BEGIN DEAD;
+<Y>1 BEGIN INITIAL;
+<Y>0 BEGIN Z;
+<Y>[^01\n] BEGIN D;
+<Y>\n BEGIN INITIAL;{printf("Valid\n");}
 
-<C>0 BEGIN B;
-<C>1 BEGIN A;
-<C>\n BEGIN INITIAL;{printf("Not Accepted\n");}
-<C>[^01\n] BEGIN DEAD;
+<Z>1 BEGIN X;
+<Z>0 BEGIN Y;
+<Z>\n BEGIN INITIAL;{printf("Invalid\n");}
+<Z>[^01\n] BEGIN D;
 
-<DEAD>[^\n] BEGIN DEAD;
-<DEAD>\n BEGIN INITIAL;{printf("Invalid\n");}
+<D>[^\n] BEGIN D;
+<D>\n BEGIN INITIAL;{printf("Invalid\n");}
 %%
+
 int yywrap(){return 1;}
 int main(){
-printf("Enter the string: ");
+printf("Enter the grammar: ");
 yylex();
 return 0;
 }

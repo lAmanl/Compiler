@@ -1,4 +1,3 @@
-// AMAN SHARMA - 21BCE5769
 %{
  #include "y.tab.h"
 %}
